@@ -55,7 +55,7 @@ public class MessengerServiceImpl implements MessengerService {
                         "AA",
                         "VVV",
                         Version.LATEST);
-//                        .obtainAppAccessToken("2032540400420495","6c8ca5d112e018c64b4a6ed7cfef836e");
+//                        .obtainAppAccessToken("aa","vvv");
         fbClient.publish("me/messages", SendResponse.class, attachment,
                 Parameter.with("recipient", new IdMessageRecipient(recipientId)),
                 Parameter.with("message", imageMessage));
