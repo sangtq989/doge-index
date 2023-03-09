@@ -52,8 +52,8 @@ public class MessengerServiceImpl implements MessengerService {
         Message imageMessage = new Message(messageAttachment);
         FacebookClient fbClient =
                 new DefaultFacebookClient(
-                        "EAAc4lbCPBo8BACJJ6Bu7qs23FjNAav2LdxvgcjtiFtoTyOHAEemb8qD3wUc9tnT66neJZA7cATTzvOAZAVtwZBcY2pn84SZBuJIfZCH2j6a5yZArJK9ZBNMHT70nbUcCS6POz4EttqhHMP2dLO29WzlF7TPQsdYzaLZCpEk4sX5Gn243icrsBiCb",
-                        "6c8ca5d112e018c64b4a6ed7cfef836e",
+                        "AA",
+                        "VVV",
                         Version.LATEST);
 //                        .obtainAppAccessToken("2032540400420495","6c8ca5d112e018c64b4a6ed7cfef836e");
         fbClient.publish("me/messages", SendResponse.class, attachment,
