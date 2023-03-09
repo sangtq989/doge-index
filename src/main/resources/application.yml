@@ -1,2 +1,3 @@
 facebook:
-  pageAccessToken: ádas
+  accessToken: aaa
+  appSecret: vvv

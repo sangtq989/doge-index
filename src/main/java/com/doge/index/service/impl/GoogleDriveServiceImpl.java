@@ -3,6 +3,7 @@ package com.doge.index.service.impl;
 import com.doge.index.service.GoogleDriveService;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,12 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
 
     @Override
     public List<File> retrieveAllFiles() throws IOException {
-        return drive.files().list()
-                .setFields("nextPageToken, files(id, name)")
-                .execute()
-                .getFiles();
+        String folderId = "1sADaU1lznbD-LRSuGKsnUxbkG1E0-smO";
+        String query = "'" + folderId + "' in parents";
+        FileList result = drive.files().list()
+                .setQ(query)
+                .setFields("nextPageToken, files(id, name, createdTime, modifiedTime, mimeType)")
+                .execute();
+        return result.getFiles();
     }
 }

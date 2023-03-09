@@ -1,12 +1,9 @@
 package com.doge.index.service.impl;
 
-import com.doge.index.service.GoogleDriveService;
 import com.doge.index.service.MessengerService;
 import com.restfb.BinaryAttachment;
-import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
-import com.restfb.Version;
 import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.MediaAttachment;
 import com.restfb.types.send.Message;
@@ -25,24 +22,9 @@ import java.nio.file.Path;
 @Slf4j
 @RequiredArgsConstructor
 public class MessengerServiceImpl implements MessengerService {
-
-    private final GoogleDriveService googleDriveService;
-//    private final Drive drive;
+    private final FacebookClient facebookClient;
 
     public void sendImageFromDrive(String recipientId) throws IOException {
-//        List<File> files = googleDriveService.retrieveAllFiles();
-//        if (files == null || files.isEmpty()) {
-//            System.out.println("No files found.");
-//            return;
-//        }
-//
-//        String fileId = files.get(0).getId(); // Use the first file found
-//
-//        // Get the content of the image file as a byte array
-//        InputStream inputStream = drive.files().get(fileId).executeMediaAsInputStream();
-
-
-
         Resource resource = new ClassPathResource("static/silly_cat.gif");
         Path path = resource.getFile().toPath();
         byte[] bytes = Files.readAllBytes(path);
@@ -50,13 +32,7 @@ public class MessengerServiceImpl implements MessengerService {
 
         MediaAttachment messageAttachment = new MediaAttachment(MediaAttachment.Type.IMAGE);
         Message imageMessage = new Message(messageAttachment);
-        FacebookClient fbClient =
-                new DefaultFacebookClient(
-                        "EAAc4lbCPBo8BACJJ6Bu7qs23FjNAav2LdxvgcjtiFtoTyOHAEemb8qD3wUc9tnT66neJZA7cATTzvOAZAVtwZBcY2pn84SZBuJIfZCH2j6a5yZArJK9ZBNMHT70nbUcCS6POz4EttqhHMP2dLO29WzlF7TPQsdYzaLZCpEk4sX5Gn243icrsBiCb",
-                        "6c8ca5d112e018c64b4a6ed7cfef836e",
-                        Version.LATEST);
-//                        .obtainAppAccessToken("2032540400420495","6c8ca5d112e018c64b4a6ed7cfef836e");
-        fbClient.publish("me/messages", SendResponse.class, attachment,
+        facebookClient.publish("me/messages", SendResponse.class, attachment,
                 Parameter.with("recipient", new IdMessageRecipient(recipientId)),
                 Parameter.with("message", imageMessage));
     }

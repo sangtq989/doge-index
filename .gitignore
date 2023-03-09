@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Key ###
+**.p12
+!/src/main/resources/static/**.json
