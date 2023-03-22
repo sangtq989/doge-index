@@ -11,9 +11,11 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Version;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -22,14 +24,10 @@ import java.util.Collections;
 @Configuration
 public class BeanFactory {
 
-    @Value("${facebook.accessToken}")
-    private String accessToken;
-    @Value("${facebook.appSecret}")
-    private String appSecret;
-
     @Bean
     public Drive getService() throws GeneralSecurityException, IOException {
-        GoogleCredential credential = GoogleCredential.fromStream(new ClassPathResource("static/gcp-vpn-368811-3b451d960f47.json").getInputStream())
+        GoogleCredential credential = GoogleCredential
+                .fromStream(new ClassPathResource("static/gcp-vpn.json").getInputStream())
                 .createScoped(Collections.singleton(DriveScopes.DRIVE));
         HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
@@ -37,8 +35,14 @@ public class BeanFactory {
     }
 
     @Bean
-    public FacebookClient createClient() {
-        return new DefaultFacebookClient(accessToken, appSecret, Version.LATEST);
+    public FacebookClient createClient(DogeConfigProperties configProperties) {
+        return new DefaultFacebookClient(configProperties.getDogeFacebook().getAccessToken(),
+                configProperties.getDogeFacebook().getAppSecret(), Version.LATEST);
+    }
+
+    @Bean
+    public RestTemplate creteat(){
+        return new RestTemplate();
     }
 
 }

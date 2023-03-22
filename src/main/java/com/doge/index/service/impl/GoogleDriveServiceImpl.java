@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,5 +28,17 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
                 .setFields("nextPageToken, files(id, name, createdTime, modifiedTime, mimeType)")
                 .execute();
         return result.getFiles();
+    }
+
+    @Override
+    public File getDogeById(String dogeId) {
+        return null;
+    }
+
+    @Override
+    public byte[] getDogeByIdAsByte(String dogeId) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        drive.files().get(dogeId).executeMedia().download(outputStream);
+        return outputStream.toByteArray();
     }
 }

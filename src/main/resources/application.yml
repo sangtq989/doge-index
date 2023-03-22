@@ -1,3 +1,11 @@
-facebook:
-  accessToken: aaa
-  appSecret: vvv
+doge:
+  dogeFacebook:
+    accessToken: ${FB_ACCESS_TOKEN:aaa}
+    appSecret: ${FB_APP_SECRET:xxx}
+  dogeDrive:
+    folderId: ${DRIVE_FOLDER_ID:xxx}
+spring:
+  data:
+    mongodb:
+      database: doge
+      uri: mongodb+srv://aaa:cccc@cluster0.mongodb.net/?retryWrites=true&w=majority

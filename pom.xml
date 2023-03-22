@@ -14,14 +14,22 @@
  <name>index-doge</name>
  <description>index-doge</description>
  <properties>
-  <java.version>11</java.version>
+  <java.version>17</java.version>
  </properties>
  <dependencies>
   <dependency>
    <groupId>org.springframework.boot</groupId>
    <artifactId>spring-boot-starter-web</artifactId>
   </dependency>
-
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-webflux</artifactId>
+  </dependency>
+  <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+  <dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-mongodb</artifactId>
+  </dependency>
   <dependency>
    <groupId>org.springframework.boot</groupId>
    <artifactId>spring-boot-configuration-processor</artifactId>
@@ -38,6 +46,13 @@
    <artifactId>spring-boot-starter-test</artifactId>
    <scope>test</scope>
   </dependency>
+  <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+  <dependency>
+   <groupId>commons-io</groupId>
+   <artifactId>commons-io</artifactId>
+   <version>2.11.0</version>
+  </dependency>
+
 
   <dependency>
    <groupId>com.google.apis</groupId>
