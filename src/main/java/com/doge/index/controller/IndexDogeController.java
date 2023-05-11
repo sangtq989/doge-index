@@ -34,17 +34,21 @@ public class IndexDogeController {
     public String verifyMessengerWebhook(@RequestParam("hub.mode") String hubMode,
                                          @RequestParam("hub.verify_token") String verifyToken,
                                          @RequestParam("hub.challenge") String challengeCode) {
-        if ("sangtqdoge989".equals(verifyToken)) {
+        if ("realDoge".equals(verifyToken)) {
             return challengeCode;
         }
         return "403";
     }
 
     @PostMapping("/messaging-webhook")
-    public void receiveMessage(@RequestBody String request) throws IOException {
+    public void receiveMessage(@RequestBody String request) {
         log.info(String.valueOf(request));
-        MessengerWebhookRequest webhookRequest = messengerWebhookObjectMapper.mapMessageRecipient(request);
-        dogeProcessService.replyFoundDoge(webhookRequest.getSenderId(), List.of(webhookRequest.getMessageText()));
+        try {
+            MessengerWebhookRequest webhookRequest = messengerWebhookObjectMapper.mapMessageRecipient(request);
+            dogeProcessService.replyFoundDoge(webhookRequest.getSenderId(), List.of(webhookRequest.getMessageText()));
+        } catch (IOException e) {
+            log.error("Problem when process Doge", e);
+        }
     }
 
     @GetMapping("/reply")

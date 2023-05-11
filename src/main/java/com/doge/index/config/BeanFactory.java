@@ -36,8 +36,10 @@ public class BeanFactory {
 
     @Bean
     public FacebookClient createClient(DogeConfigProperties configProperties) {
-        return new DefaultFacebookClient(configProperties.getDogeFacebook().getAccessToken(),
-                configProperties.getDogeFacebook().getAppSecret(), Version.LATEST);
+        return new DefaultFacebookClient(
+                configProperties.getDogeFacebook().getAccessToken(),
+//                configProperties.getDogeFacebook().getAppSecret(),
+                Version.LATEST);
     }
 
     @Bean

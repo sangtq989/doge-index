@@ -31,6 +31,5 @@ public class MessengerWebhookObjectMapper extends ObjectMapper {
                 .senderId(recipientNode.get("id").asText())
                 .build();
 
-
     }
 }

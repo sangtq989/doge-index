@@ -18,5 +18,6 @@ public class Doge {
     private String title;
     private String description;
     private List<String> keywords;
+    private String messageId;
     // getters and setters
 }
